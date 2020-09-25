@@ -2,6 +2,7 @@ package Server;
 
 public class main {
     public static void main(String[] args) {
-        Logic logic = new Logic(Integer.parseInt(args[0]));
+        Incoming incoming = new Incoming(Integer.parseInt(args[0]));
+        incoming.start();
     }
 }

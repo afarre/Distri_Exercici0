@@ -1,4 +1,4 @@
-package Xarxa;
+package Server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,9 +9,11 @@ public class DedicatedIncoming extends Thread{
     private DataInputStream diStream;
     private DataOutputStream doStream;
     private Socket sClient;
+    private boolean work;
 
     public DedicatedIncoming(Socket sClient) {
         this.sClient = sClient;
+        this.work = false;
     }
 
     @Override
@@ -33,5 +35,23 @@ public class DedicatedIncoming extends Thread{
     private void readRequest(String request) throws IOException {
         System.out.println("Got this request in Xarxa: " + request);
         doStream.writeUTF("Hello server. Welcome to the net.");
+        switch (request){
+            case "WORK":
+                work = true;
+                break;
+            case "READ":
+                break;
+        }
+    }
+
+    public int work() {
+        try {
+            System.out.println("Sent work");
+            doStream.writeUTF("WORK");
+            return diStream.readInt();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }
