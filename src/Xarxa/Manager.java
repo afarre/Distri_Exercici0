@@ -1,12 +1,9 @@
 package Xarxa;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Manager {
-    private int port;
     private int num;
-
     private ArrayList<Logic> serverList;
     private int serversReady;
     private int numServers;
@@ -16,7 +13,6 @@ public class Manager {
         serversReady = 0;
         num = 0;
         this.numServers = numServers;
-        this.port = port;
         serverList = new ArrayList<>();
 
         for (int i = 0; i < numServers; i++){
@@ -31,37 +27,13 @@ public class Manager {
         serversReady++;
         if (serversReady == numServers){
             System.out.println("All childs ready");
-            for (Logic logic :serverList) {
-                int newNum = logic.work(num);
-                System.out.println("Got newNum:" + newNum);
-                this.num = newNum;
-            }
-        }
-    }
-
-/*
-
-
-
-    private void waitForWork() {
-        while (true){
-            try {
-                doStream.writeUTF("Hello from a server!");
-                String answer = diStream.readUTF();
-                System.out.println("Xarxa answered with: " + answer);
-                answer = diStream.readUTF();
-                System.out.println("Answer: " + answer);
-                if (answer.equals("WORK")){
-                    work();
+            while (true){
+                for (Logic logic :serverList) {
+                    int newNum = logic.work(num);
+                    System.out.println("Got new number update:" + newNum);
+                    this.num = newNum;
                 }
-                System.out.println("Told me to " + answer);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
-
- */
-
-
 }

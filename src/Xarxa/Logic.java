@@ -44,9 +44,7 @@ public class Logic extends Thread{
 
     public int work(int num) {
         try {
-            System.out.println("Sending work");
             doStream.writeUTF("WORK");
-            System.out.println("Sending num: " + num);
             doStream.writeInt(num);
             return diStream.readInt();
         } catch (IOException e) {
