@@ -64,7 +64,6 @@ public class Incoming extends Thread{
       //  doStream.writeUTF("Hello server. Welcome to the net.");
         switch (request){
             case "WORK":
-                System.out.println("[DEBUG] Got work");
                 work();
                 break;
             case "Connected":
@@ -82,15 +81,17 @@ public class Incoming extends Thread{
                     Thread.sleep(1000);
                 }
                 System.out.println("Updated number to: " + num);
+                System.out.println("---------------------------------------");
             }else {
                 num = diStream.readInt();
                 System.out.println("Reading number: " + num);
+                System.out.println("Updating number...");
                 for (int i = 0; i < 10; i++) {
-                    System.out.println("Updating number: " + num);
                     Thread.sleep(1000);
-                    System.out.println("Done sleeping 2");
                 }
                 num++;
+                System.out.println("Updated number to: " + num);
+                System.out.println("---------------------------------------");
             }
             doStream.writeInt(num);
         } catch (InterruptedException | IOException e) {
