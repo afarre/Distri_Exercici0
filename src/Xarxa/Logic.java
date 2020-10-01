@@ -42,15 +42,22 @@ public class Logic extends Thread{
         }
     }
 
-    public int work(int num) {
+    public int sendNum(int num) {
         try {
-            doStream.writeUTF("WORK");
             doStream.writeInt(num);
             return diStream.readInt();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    public void sendWork() {
+        try {
+            doStream.writeUTF("WORK");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

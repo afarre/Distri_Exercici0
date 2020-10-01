@@ -27,10 +27,14 @@ public class Manager {
         serversReady++;
         if (serversReady == numServers){
             System.out.println("All childs ready");
+            for (Logic logic :serverList) {
+                logic.sendWork();
+            }
+
             while (true){
                 for (Logic logic :serverList) {
-                    int newNum = logic.work(num);
-                    System.out.println("Got new number update:" + newNum);
+                    int newNum = logic.sendNum(num);
+                    System.out.println("Got new number update: " + newNum);
                     this.num = newNum;
                 }
             }
